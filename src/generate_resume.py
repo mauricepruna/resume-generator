@@ -1,13 +1,24 @@
 from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
-from resume_data import (
-    NAME, TITLE, LOCATION, EMAIL_USER, EMAIL_DOMAIN,
-    SUMMARY, SKILLS, EDUCATION,
-    EXPERIENCE_SECTION_LABEL, BOLD_TERMS, JOBS,
-    RECOGNITIONS, PATENT_LINE, PATENT_DESCRIPTION,
-)
 from reportlab.pdfgen import canvas
+
+from resume_data import (
+    BOLD_TERMS,
+    EDUCATION,
+    EMAIL_DOMAIN,
+    EMAIL_USER,
+    EXPERIENCE_SECTION_LABEL,
+    JOBS,
+    LOCATION,
+    NAME,
+    PATENT_DESCRIPTION,
+    PATENT_LINE,
+    RECOGNITIONS,
+    SKILLS,
+    SUMMARY,
+    TITLE,
+)
 
 WIDTH, HEIGHT = letter
 SIDEBAR_W = 2.4 * inch
@@ -357,7 +368,7 @@ def generate(theme):
             my -= 1
 
         my -= 2
-        if i < len(jobs) - 1:
+        if i < len(job) - 1:
             c.setStrokeColor(t["main_divider"])
             c.setLineWidth(0.3)
             c.line(mx, my, mx + mw, my)
