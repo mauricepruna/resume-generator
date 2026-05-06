@@ -159,6 +159,22 @@ THEMES = [
         "main_divider": "#DDD5C5",
         "bullet_dot": "#8C7B6E",
     },
+    {
+        "filename": "Resume_Carbon_Orange.pdf",
+        "sb_bg": "#2E2E2E",
+        "sb_name": "#FFFFFF",
+        "sb_subtitle": "#AAAAAA",
+        "sb_heading": "#E67E22",
+        "sb_label": "#AAAAAA",
+        "sb_value": "#CCCCCC",
+        "sb_divider": "#444444",
+        "main_bg": "#FFFFFF",
+        "main_text": "#1A1A1A",
+        "main_light": "#666666",
+        "main_heading": "#E67E22",
+        "main_divider": "#E0E0E0",
+        "bullet_dot": "#E67E22",
+    },
     # --- Print-friendly ---
     {
         "filename": "Resume_Print.pdf",

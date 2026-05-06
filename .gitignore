@@ -13,3 +13,4 @@ wheels/
 
 # Personal resume data — do not commit
 resume_data.py
+.DS_Store
