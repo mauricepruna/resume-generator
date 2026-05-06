@@ -1,7 +1,12 @@
+import os
+
 from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
+
+OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "output")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 from resume_data import (
     BOLD_TERMS,
@@ -154,6 +159,23 @@ THEMES = [
         "main_divider": "#DDD5C5",
         "bullet_dot": "#8C7B6E",
     },
+    # --- Print-friendly ---
+    {
+        "filename": "Resume_Print.pdf",
+        "sb_bg": "#D6D6D6",
+        "sb_name": "#111111",
+        "sb_subtitle": "#444444",
+        "sb_heading": "#222222",
+        "sb_label": "#555555",
+        "sb_value": "#333333",
+        "sb_divider": "#BBBBBB",
+        "main_bg": "#FFFFFF",
+        "main_text": "#111111",
+        "main_light": "#555555",
+        "main_heading": "#222222",
+        "main_divider": "#CCCCCC",
+        "bullet_dot": "#555555",
+    },
 ]
 
 
@@ -264,7 +286,8 @@ def generate(theme):
         for k, v in theme.items()
     }
 
-    c = canvas.Canvas(theme["filename"], pagesize=letter)
+    out_path = os.path.join(OUTPUT_DIR, theme["filename"])
+    c = canvas.Canvas(out_path, pagesize=letter)
 
     # Backgrounds
     c.setFillColor(t["sb_bg"])
@@ -291,9 +314,8 @@ def generate(theme):
     sy = draw_sidebar_heading(
         c, sx, sy, "Contact", sw, t["sb_heading"], t["sb_divider"]
     )
-    sy = draw_text_block(c, sx, sy, LOCATION, 8.5, t["sb_value"], sw)
-    sy = draw_text_block(c, sx, sy, EMAIL_USER, 8.5, t["sb_value"], sw)
-    sy = draw_text_block(c, sx, sy, EMAIL_DOMAIN, 8.5, t["sb_value"], sw)
+    sy = draw_text_block(c, sx, sy, LOCATION, 8.5, t["sb_value"], sw, leading=9.5)
+    sy = draw_text_block(c, sx, sy, EMAIL_USER + EMAIL_DOMAIN, 8.5, t["sb_value"], sw, leading=9.5)
     sy -= 10
 
     # Skills
@@ -404,9 +426,10 @@ def generate(theme):
     c.drawString(mx, my, PATENT_DESCRIPTION)
 
     c.save()
-    return theme["filename"]
+    return out_path
 
 
-for theme in THEMES:
-    path = generate(theme)
-    print(f"Saved: {path}")
+if __name__ == "__main__":
+    for theme in THEMES:
+        path = generate(theme)
+        print(f"Saved: {path}")
